@@ -2,6 +2,8 @@
 #define _TREE_H
 
 #include "data.h"
+#include "entropy.h"
+
 #include <iostream>
 
 struct Node{
@@ -23,6 +25,7 @@ public:
     Tree();
     Tree(Data* dat);
     void makeTree();
+    void making(Data* set, std::string used_attrs);
     Data* getData(){ return data; }
 };
 

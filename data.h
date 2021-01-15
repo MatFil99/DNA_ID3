@@ -29,8 +29,8 @@ class Data{
     int boundary_e_i;
 
     Data();
-    Data(std::string seq, char val);
-    Data( Data* dat, std::string attr, char val);
+    Data(std::string seq, char attr, char val);
+    Data( Data* dat, char attr, char val);
     int loadDataFromFile(const std::string path_file);
     void printData();
     int getAmountData(){ data.size(); }

@@ -16,6 +16,12 @@ void Entropy::calculateEntropy(std::string used_attrs){
     int* help_statistics = new int[ATTR_VALS*2*ATTRS];  // array hepling to calculate entropy 
     initZero(help_statistics, ATTR_VALS*2*ATTRS);
     processSeq(help_statistics, used_attrs);
+
+    for(int i=0; i<ATTR_VALS*2*ATTRS; i++){
+        std::cout << help_statistics[i] <<" ";
+        if( (i+1)%30==0) std::cout << "\n"; 
+    }
+
     calcValEntropy(help_statistics);
     
     delete[] help_statistics;
@@ -25,8 +31,8 @@ void Entropy::processSeq(int* help_statistics, std::string used_attrs){
     std::vector<DNA>::iterator it = data->getData()->begin();
     for( it; it<data->getData()->end(); it++ ){
         for( int i=0; i<it->getDNA_sequence().size(); i++ ){
-            if( used_attrs.find(it->getDNA_sequence().at(i))==std::string::npos ){
-                
+            if( used_attrs.find(std::to_string(i))==std::string::npos ){
+                // std::cout <<used_attrs << "\n";
                 int offset = 0;
                 if( it->getValue()==1 ){ ++offset; }// note what is the value of function for this sequence 
                 switch(it->getDNA_seqAt(i)){  // this could be universal, but isnt
@@ -50,10 +56,10 @@ void Entropy::processSeq(int* help_statistics, std::string used_attrs){
 
 void Entropy::calcValEntropy(int* help_statistics){
     for(int i=0; i<ATTRS; i++){
-        int Av0 = help_statistics[A_OFFSET+i], Av1 = help_statistics[A_OFFSET+OFFSET_1+i];
-        int Cv0 = help_statistics[C_OFFSET+i], Cv1 = help_statistics[C_OFFSET+OFFSET_1+i];
-        int Gv0 = help_statistics[G_OFFSET+i], Gv1 = help_statistics[G_OFFSET+OFFSET_1+i];
-        int Tv0 = help_statistics[T_OFFSET+i], Tv1 = help_statistics[T_OFFSET+OFFSET_1+i];
+        int Av0 = help_statistics[A_OFFSET+2*i], Av1 = help_statistics[A_OFFSET+OFFSET_1+2*i];
+        int Cv0 = help_statistics[C_OFFSET+2*i], Cv1 = help_statistics[C_OFFSET+OFFSET_1+2*i];
+        int Gv0 = help_statistics[G_OFFSET+2*i], Gv1 = help_statistics[G_OFFSET+OFFSET_1+2*i];
+        int Tv0 = help_statistics[T_OFFSET+2*i], Tv1 = help_statistics[T_OFFSET+OFFSET_1+2*i];
         int sumACGT = Av0+Av1+Cv0+Cv1+Gv0+Gv1+Tv0+Tv1;
         double entropy=0;
 
@@ -89,10 +95,18 @@ double Entropy::countAttrEntr(int n1, int n2){
     }else return -1;
 }
 
-void initZero(int* var, int size){
-    for(int i=0; i<size; i++){
-        var[i]=0;
+char Entropy::getLowestEntropyAttr(){
+    std::vector<AttrEntropy>::iterator it = attr_entropy.begin();
+    double lowest=it->getValue();
+    char low_attr=it->getAttr();
+    for( it; it<attr_entropy.end(); it++ ){
+        if((it->getValue()<lowest && it->getValue()!=-1) || (it->getValue()!=-1 && lowest==-1)){
+            lowest = it->getValue();
+            low_attr = it->getAttr();
+        std::cout << "A\n";
+        }
     }
+    return low_attr;
 }
 
 void Entropy::printEntropyAttr(){
@@ -106,5 +120,11 @@ void Entropy::printEntropyAVal(){
     std::vector<AttrClassEntropy>::iterator it = attr_class_entropy.begin();
     for(it; it<attr_class_entropy.end(); it++ ){
         it->printEntropy();
+    }
+}
+
+void initZero(int* var, int size){
+    for(int i=0; i<size; i++){
+        var[i]=0;
     }
 }

@@ -21,6 +21,8 @@ class AttrEntropy{
 public:
     AttrEntropy(char a, double v): attr(a), value(v){}
     void printEntropy(){ std::cout << (int)attr << "\t" << value << "\n";}
+    double getValue(){ return value; }
+    char getAttr(){ return attr; }
 };
 
 class Entropy{
@@ -39,7 +41,7 @@ public:
 
     void printEntropyAVal();
     void printEntropyAttr();
-    
+    char getLowestEntropyAttr();
 };
 
 void initZero(int*, int);

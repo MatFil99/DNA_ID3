@@ -37,8 +37,17 @@ int Data::loadDataFromFile(const std::string path_file){
     }
 }
 
-Data::Data( Data* dat, std::string attr, char val){
+Data::Data( Data* dat, char attr, char val){
     // create new Data as a set grouped by attr=val
+
+    std::vector<DNA>::iterator it = dat->getData()->begin();
+    for( it; it<dat->getData()->end(); it++ ){
+        if(it->getDNA_sequence()[(int)attr] == val ){
+            DNA dna(it->getDNA_sequence(), it->getValue());
+            data.push_back(dna);
+        }
+    }
+
 }
 
 void Data::printData(){
