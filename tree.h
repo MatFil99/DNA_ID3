@@ -22,7 +22,7 @@ class Tree{
 public:
     Tree();
     Tree(Data dat);
-    void makeTree(Data data);
+    void makeTree();
 };
 
 
