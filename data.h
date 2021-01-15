@@ -7,6 +7,9 @@
 
 #include <iostream>
 
+#define ATTR_VALS 4 // amount values of attributes 
+#define ATTRS 15    // amount of attributes
+
 class DNA{
     std::string DNA_sequence;
     char value;                 // specifies if this sequence is a donor / acceptor
@@ -16,6 +19,8 @@ public:
     DNA(std::string seq, char val);
     std::string getDNA_sequence(){ return DNA_sequence; }
     char getValue(){ return value; }
+    int getDNA_seqSize() { return DNA_sequence.size(); }
+    char getDNA_seqAt(int i){ return DNA_sequence.at(i); };
 };
 
 class Data{
@@ -25,9 +30,11 @@ class Data{
 
     Data();
     Data(std::string seq, char val);
+    Data( Data* dat, std::string attr, char val);
     int loadDataFromFile(const std::string path_file);
     void printData();
     int getAmountData(){ data.size(); }
+    std::vector<DNA>* getData(){ return &data; }
 };
 
 #endif //

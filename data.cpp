@@ -23,11 +23,10 @@ int Data::loadDataFromFile(const std::string path_file){
         if( !file.eof() ){
             file >> boundary_e_i;
         }
-        while( !file.eof() ){
-            std::string seq;
-            char val;
-            file >> seq;
-            file >> val;
+        std::string seq;
+        char val;
+        while( file>>val>>seq ){
+            val = val-48;   // change character of '0' and '1' to number 0 or 1
             DNA dna(seq, val);
             data.push_back(dna);
         }
@@ -38,9 +37,13 @@ int Data::loadDataFromFile(const std::string path_file){
     }
 }
 
+Data::Data( Data* dat, std::string attr, char val){
+    // create new Data as a set grouped by attr=val
+}
+
 void Data::printData(){
     std::vector<DNA>::iterator it = data.begin();
     for( it; it != data.end(); it++){
-        std::cout << it->getDNA_sequence() << "\t" << it->getValue() << "\n";
+        std::cout << it->getDNA_sequence() << "\t" << (int)it->getValue() << "\n";
     }
 }

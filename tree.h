@@ -21,8 +21,9 @@ class Tree{
     Data* data;
 public:
     Tree();
-    Tree(Data dat);
+    Tree(Data* dat);
     void makeTree();
+    Data* getData(){ return data; }
 };
 
 

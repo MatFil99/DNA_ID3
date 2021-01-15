@@ -10,8 +10,8 @@ Tree::Tree(){
     std::cout << "Constructor Tree\n";
 }
 
-Tree::Tree(Data dat):
-data(&dat)
+Tree::Tree(Data* dat):
+data(dat)
 {}
 
 void Tree::makeTree(){
