@@ -60,7 +60,7 @@ void Tree::making(Node* root, Data* set, std::string used_attrs){
 
     std::cout << used_attrs <<"\n";
 
-    // entropy.printEntropyAttr();
+    //entropy.printEntropyAttr();
     
 std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - - - - - -\n\n";
 
@@ -74,45 +74,25 @@ std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - -
     
     makeBranch(root, set, &setC, used_attrs, 'C');
     
-    // makeBranch(root, set, &setG, used_attrs, 'G'); // tu jest jakis blad
-    // makeBranch(root, set, &setT, used_attrs, 'T');
-
-
-
-    // if(setC.dataOneVal()){
-    //     root->C = new Node(nullptr, nullptr, nullptr, nullptr, -1, setC.getData()->begin()->getValue());
-    // }else{
-    //     root->C = new Node();
-    //     making(root->C, &setC, used_attrs);
-    // }
-    // if(setG.dataOneVal()){
-    //     root->G = new Node(nullptr, nullptr, nullptr, nullptr, -1, setG.getData()->begin()->getValue());
-    // }else{
-    //     root->G = new Node();
-    //     making(root->G, &setG, used_attrs);
-    // }
-    // if(setG.dataOneVal()){
-    //     root->G = new Node(nullptr, nullptr, nullptr, nullptr, -1, setT.getData()->begin()->getValue());
-    // }else{
-    //     root->T = new Node();
-    //     making(root->T, &setT, used_attrs);
-    // }
+    makeBranch(root, set, &setG, used_attrs, 'G'); // tu jest jakis blad
+    makeBranch(root, set, &setT, used_attrs, 'T');
 
 }
 
 void Tree::makeBranch(Node* root, Data* supset, Data* set, std::string used_attrs, char branch){
     Node* b_node;
     bool stop = true;
-    if(set->dataOneVal()){
+    if(set->getAmountData()==0){
+        std::cout << "make branch 3\n";
+        b_node = new Node(nullptr, nullptr, nullptr, nullptr, -1, supset->getMostComVal());
+    }
+    else if(set->dataOneVal()){
         b_node = new Node(nullptr, nullptr, nullptr, nullptr, -1, set->getData()->begin()->getValue());
         // std::cout << "Nie uruchomiono tego\n";
         std::cout << "make branch 1\n";
     }else if(set->allAttrUsed(used_attrs)){
         b_node = new Node(nullptr, nullptr, nullptr, nullptr, -1, set->getMostComVal());
         std::cout << "make branch 2\n";
-    }else if(set->getAmountData()==0){
-        std::cout << "make branch 3\n";
-        b_node = new Node(nullptr, nullptr, nullptr, nullptr, -1, supset->getMostComVal());
     }else{
         std::cout << "make branch 4\n";
         stop=false;
@@ -134,6 +114,6 @@ void Tree::makeBranch(Node* root, Data* supset, Data* set, std::string used_attr
             break;
     }
     if( !stop ){
-        making(b_node, set, used_attrs);
+       making(b_node, set, used_attrs);
     }
 }

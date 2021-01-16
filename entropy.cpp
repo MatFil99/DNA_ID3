@@ -89,11 +89,11 @@ double Entropy::countAttrEntr(int n1, int n2){
         double p_1 = n2/(n1+n2+0.0);
 
         if(p_0==0){
-            return p_1*log(1.0/p_1);
+            return p_1*log2(1.0/p_1);
         }else if(p_1==0){
             return p_0*log2(1.0/p_0); 
         }
-        return p_0*log2(1.0/p_0)+p_1*log(1.0/p_1);
+        return p_0*log2(1.0/p_0)+p_1*log2(1.0/p_1);
     }else return -1;
 }
 
