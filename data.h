@@ -21,6 +21,7 @@ public:
     char getValue(){ return value; }
     int getDNA_seqSize() { return DNA_sequence.size(); }
     char getDNA_seqAt(int i){ return DNA_sequence.at(i); };
+    bool allAttrUsed(std::string used_attr);
 };
 
 class Data{
@@ -35,6 +36,9 @@ class Data{
     void printData();
     int getAmountData(){ data.size(); }
     std::vector<DNA>* getData(){ return &data; }
+    bool dataOneVal();
+    bool allAttrUsed(std::string used_attr);
+    char getMostComVal();
 };
 
 #endif //

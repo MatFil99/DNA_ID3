@@ -17,10 +17,10 @@ void Entropy::calculateEntropy(std::string used_attrs){
     initZero(help_statistics, ATTR_VALS*2*ATTRS);
     processSeq(help_statistics, used_attrs);
 
-    for(int i=0; i<ATTR_VALS*2*ATTRS; i++){
-        std::cout << help_statistics[i] <<" ";
-        if( (i+1)%30==0) std::cout << "\n"; 
-    }
+    // for(int i=0; i<ATTR_VALS*2*ATTRS; i++){
+    //     std::cout << help_statistics[i] <<" ";
+    //     if( (i+1)%30==0) std::cout << "\n"; 
+    // }
 
     calcValEntropy(help_statistics);
     
@@ -31,7 +31,8 @@ void Entropy::processSeq(int* help_statistics, std::string used_attrs){
     std::vector<DNA>::iterator it = data->getData()->begin();
     for( it; it<data->getData()->end(); it++ ){
         for( int i=0; i<it->getDNA_sequence().size(); i++ ){
-            if( used_attrs.find(std::to_string(i))==std::string::npos ){
+            std::string act_attr = std::string(".").append(std::to_string(i).append("."));
+            if( used_attrs.find( act_attr )==std::string::npos ){
                 // std::cout <<used_attrs << "\n";
                 int offset = 0;
                 if( it->getValue()==1 ){ ++offset; }// note what is the value of function for this sequence 
@@ -56,6 +57,7 @@ void Entropy::processSeq(int* help_statistics, std::string used_attrs){
 
 void Entropy::calcValEntropy(int* help_statistics){
     for(int i=0; i<ATTRS; i++){
+        // if( used_attrs.find( std::to_string(i) ) )
         int Av0 = help_statistics[A_OFFSET+2*i], Av1 = help_statistics[A_OFFSET+OFFSET_1+2*i];
         int Cv0 = help_statistics[C_OFFSET+2*i], Cv1 = help_statistics[C_OFFSET+OFFSET_1+2*i];
         int Gv0 = help_statistics[G_OFFSET+2*i], Gv1 = help_statistics[G_OFFSET+OFFSET_1+2*i];
@@ -95,15 +97,17 @@ double Entropy::countAttrEntr(int n1, int n2){
     }else return -1;
 }
 
-char Entropy::getLowestEntropyAttr(){
+char Entropy::getLowestEntropyAttr(std::string used_attrs){
     std::vector<AttrEntropy>::iterator it = attr_entropy.begin();
     double lowest=it->getValue();
     char low_attr=it->getAttr();
     for( it; it<attr_entropy.end(); it++ ){
-        if((it->getValue()<lowest && it->getValue()!=-1) || (it->getValue()!=-1 && lowest==-1)){
-            lowest = it->getValue();
-            low_attr = it->getAttr();
-        std::cout << "A\n";
+        std::string act_attr = std::string(".").append(std::to_string(it->getAttr()).append("."));
+        if( used_attrs.find(act_attr) == std::string::npos ){
+            if( (it->getValue()<lowest && it->getValue()!=-1) || (it->getValue()!=-1 && lowest==-1)){
+                lowest = it->getValue();
+                low_attr = it->getAttr();
+            }
         }
     }
     return low_attr;

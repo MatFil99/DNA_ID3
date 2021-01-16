@@ -9,25 +9,20 @@ int main(){
     Data data;
 
     data.loadDataFromFile("dane/spliceDTrainKIS.dat");
-    // data.printData();
 
-    // std::cout << data.getAmountData() << "\n\n\n";
     Tree tree(&data);
-    // tree.getData()->printData();
-    std::string u_attr="";
-    tree.making(&data, u_attr);
-    
-    std::string un_attrs="01";
+
+    tree.makeTree();
+
+    // Node* node1 = new Node(nullptr, nullptr, nullptr, nullptr, 0, 0);
+    // Node* node2 = new Node(nullptr, nullptr, nullptr, nullptr, 0, 0);
+    // Node* node3 = new Node(nullptr, nullptr, nullptr, nullptr, 0, 0);
+    // Node* node1 = new Node(nullptr, nullptr, nullptr, nullptr, 0, 0);
 
 
-    Entropy e(&data);
+    // Node node = Node(node1, node2, nullptr, node3, 0, 0);
 
-    e.calculateEntropy(un_attrs);
-
-    e.printEntropyAttr();
-    // std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
-    // e.printEntropyAVal();
-    // std::cout << "\n\n";
+    // delete node;
 
 
 

@@ -41,7 +41,7 @@ public:
 
     void printEntropyAVal();
     void printEntropyAttr();
-    char getLowestEntropyAttr();
+    char getLowestEntropyAttr(std::string used_attrs);
 };
 
 void initZero(int*, int);
