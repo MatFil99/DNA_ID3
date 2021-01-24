@@ -131,7 +131,7 @@ std::vector<DNA> Data::getLearningSet(int idx, int nr_divs ){
     learning_set.resize( data.size() - set_size );
 
     if(idx!=0){
-        std::copy(data.begin(), data.begin() + idx*nr_data + std::min(idx, rest)/*-1*/, learning_set.begin());
+        std::copy(data.begin(), data.begin() + idx*nr_data + std::min(idx, rest), learning_set.begin());
     }
     if(idx!=nr_divs-1){
         std::copy( data.begin() + idx*nr_data + std::min(idx, rest) + set_size, data.end(), learning_set.begin() + idx*nr_data + std::min(idx, rest) );
