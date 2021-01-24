@@ -79,7 +79,7 @@ Data::Data( Data* dat, char attr, char val){
 void Data::printData(){
     std::vector<DNA>::iterator it = data.begin();
     for( it; it != data.end(); it++){
-        std::cout << it->getDNA_sequence() << "\t" << (int)it->getValue() << "\n";
+        // std::cout << it->getDNA_sequence() << "\t" << (int)it->getValue() << "\n";
     }
 }
 

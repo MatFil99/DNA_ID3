@@ -27,7 +27,7 @@ public:
 class Data{
     public:
     std::vector<DNA> data;
-    int boundary_e_i;
+    int boundary_e_i;   // where is ekson 
 
     Data();
     Data(std::string seq, char attr, char val);
