@@ -90,30 +90,30 @@ void Tree::makeTree(){
 void Tree::making(Node* root, Data* set, std::string used_attrs){
     Entropy entropy(set);
     entropy.calculateEntropy(used_attrs);
-//     char attr_lowest = entropy.getLowestEntropyAttr(used_attrs);
-//     used_attrs.append(std::to_string((int)attr_lowest));
-//     used_attrs.push_back('.');
-//     root->setAttr(attr_lowest);
-//     Data setA(set, attr_lowest, 'A');
-//     Data setC(set, attr_lowest, 'C');
-//     Data setG(set, attr_lowest, 'G');
-//     Data setT(set, attr_lowest, 'T');
+    char attr_lowest = entropy.getLowestEntropyAttr(used_attrs);
+    used_attrs.append(std::to_string((int)attr_lowest));
+    used_attrs.push_back('.');
+    root->setAttr(attr_lowest);
+    Data setA(set, attr_lowest, 'A');
+    Data setC(set, attr_lowest, 'C');
+    Data setG(set, attr_lowest, 'G');
+    Data setT(set, attr_lowest, 'T');
 
-//     // std::cout << used_attrs <<"\n";
+    // std::cout << used_attrs <<"\n";
 
-//     //entropy.printEntropyAttr();
+    //entropy.printEntropyAttr();
     
-// // std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - - - - - -\n\n";
+// std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - - - - - -\n\n";
 
-//     // setA.printData();
-// // std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - - - - - -\n\n";
+    // setA.printData();
+// std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - - - - - -\n\n";
 
-//     // setC.printData();
+    // setC.printData();
 
-//     makeBranch(root, set, &setA, used_attrs, 'A');
-//     makeBranch(root, set, &setC, used_attrs, 'C');
-//     makeBranch(root, set, &setG, used_attrs, 'G');
-//     makeBranch(root, set, &setT, used_attrs, 'T');
+    makeBranch(root, set, &setA, used_attrs, 'A');
+    makeBranch(root, set, &setC, used_attrs, 'C');
+    makeBranch(root, set, &setG, used_attrs, 'G');
+    makeBranch(root, set, &setT, used_attrs, 'T');
 
 }
 

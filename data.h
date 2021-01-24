@@ -7,8 +7,7 @@
 
 #include <iostream>
 
-#define ATTR_VALS 4 // amount values of attributes 
-#define ATTRS 15    // amount of attributes
+
 
 class DNA{
     std::string DNA_sequence;

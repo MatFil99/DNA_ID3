@@ -35,13 +35,13 @@ int main(){
 
     // tree.getRoot();
 
-    // TestData tdata(data, &tree);
+    TestData tdata(data, &tree);
 
-    // tdata.classify();
+    tdata.classify();
 
     // tdata.printData();
 
-    // std::cout << "Efficiency:\t" << tdata.checkEfficiency() << "\n";
+    std::cout << "Efficiency:\t" << tdata.checkEfficiency() << "\n";
 
     // tree.printTree();
     // Node* node1 = new Node(nullptr, nullptr, nullptr, nullptr, 0, 0);

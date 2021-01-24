@@ -31,9 +31,17 @@ class Entropy{
     std::vector<AttrEntropy> attr_entropy;
     std::vector<AttrClassEntropy> attr_class_entropy;
 
+    class Parameters{
+    public:
+        int A_OFFSET, C_OFFSET, G_OFFSET, T_OFFSET, ATTR_VALS, ATTRS, OFFSET_1=1;
+        void setParams(int a_of, int c_of, int g_of, int t_of, int attr_vals, int attrs, int of_1 ){
+            A_OFFSET=a_of; C_OFFSET=c_of; G_OFFSET=g_of; T_OFFSET=t_of; ATTR_VALS=attr_vals; ATTRS=attrs; OFFSET_1=of_1;
+        }
+    }PARAMS;
+
 public:
     Entropy();
-    Entropy(Data* dat): data(dat){};
+    Entropy(Data* dat);
     void calculateEntropy(std::string used_attrs);
     void processSeq(int*, std::string used_attrs );
     void calcValEntropy(int*);
