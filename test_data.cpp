@@ -5,7 +5,7 @@ TestData::TestData(){
 }
 
 TestData::TestData( Data d ):
-Data(d)
+Data(d), learning_set(data.size())
 {
 }
 
@@ -15,7 +15,7 @@ classifier(c)
 }
 
 TestData::TestData( Data d, Tree* t):
-Data(d), classifier(t)
+Data(d), classifier(t), learning_set(data.size())
 {
 }
 
@@ -44,3 +44,6 @@ double TestData::checkEfficiency(){
     }
     return correct_predictions/(getAmountData()+0.0);
 }
+
+
+

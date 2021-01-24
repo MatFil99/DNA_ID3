@@ -6,6 +6,7 @@
 #include <fstream>
 
 #include <iostream>
+#include <random>
 
 
 
@@ -22,6 +23,7 @@ public:
     char getDNA_seqAt(int i){ return DNA_sequence.at(i); };
     bool allAttrUsed(std::string used_attr);
     void setPredict(char pred_val){ predict=pred_val; }
+    void setDNA(std::string dna_seq, char val){ DNA_sequence=dna_seq; value=val; }
     char getPredict(){ return predict; }
     bool correctPredict() { return value==predict; }
 };
@@ -34,13 +36,19 @@ class Data{
     Data();
     Data(std::string seq, char attr, char val);
     Data( Data* dat, char attr, char val);
+    Data(std::vector<DNA> dna );
+    // Data( Data& d);
     int loadDataFromFile(const std::string path_file);
     void printData();
-    int getAmountData(){ data.size(); }
+    int getAmountData()const{ return data.size(); }
     std::vector<DNA>* getData(){ return &data; }
     bool dataOneVal();
     bool allAttrUsed(std::string used_attr);
     char getMostComVal();
+    int getBoundaryEI()const {return boundary_e_i;}
+    void mixData();
+    std::vector<DNA> getLearningSet( int , int );
+    std::vector<DNA> getTestSet(int, int);
 };
 
 #endif //

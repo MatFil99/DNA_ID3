@@ -7,7 +7,8 @@
 class TestData: public Data{
 public:
     Tree* classifier;
-    
+    std::vector<DNA> learning_set;
+
     TestData();
     TestData( Data d );
     TestData( Tree* c );

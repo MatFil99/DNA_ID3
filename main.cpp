@@ -25,23 +25,31 @@ int main(){
 
     data.loadDataFromFile("dane/spliceATrainKIS.dat");
 
-    Tree tree(&data);
-
-    // std::cout << data.getData()->at(0).getDNA_sequence().length();
-
-    tree.makeTree();
+    data.mixData();
 
     // data.printData();
 
-    // tree.getRoot();
+    /* Test chosing learning set */
 
-    TestData tdata(data, &tree);
+    std::vector<DNA> learning_set = data.getLearningSet(4, 5);
+    std::cout << "\n * - * - * - * - * - * - * - * - * - * - * - * \n";
+    std::vector<DNA>::iterator it = learning_set.begin();
+    for( it; it<learning_set.end(); ++it ){
+        std::cout << it->getDNA_sequence() << "\t" << (int)it->getValue() << "\n";
+    }
 
-    tdata.classify();
+    Data testData(data.getTestSet(4, 5));
+    testData.printData();
+    
+    std::cout << "\n\n" << data.getAmountData() << "\n" << learning_set.size() << "\n" << testData.getAmountData() << "\n";
 
-    // tdata.printData();
+    /* test building tree and classification based on it */
 
-    std::cout << "Efficiency:\t" << tdata.checkEfficiency() << "\n";
+    // Tree tree(&data);
+    // tree.makeTree();
+    // TestData tdata(data, &tree);
+    // tdata.classify();
+    // std::cout << "Efficiency:\t" << tdata.checkEfficiency() << "\n";
 
     // tree.printTree();
     // Node* node1 = new Node(nullptr, nullptr, nullptr, nullptr, 0, 0);

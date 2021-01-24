@@ -18,12 +18,6 @@ bool DNA::allAttrUsed(std::string used_attr){
     return counter==DNA_sequence.length();
 }
 
-bool Data::allAttrUsed(std::string used_attr){
-    if( data.size()!=0){
-        return data.begin()->allAttrUsed(used_attr);
-    }
-    return false;
-}
 
 Data::Data(){
     // std::cout << "Data constructor\n";
@@ -63,6 +57,13 @@ int Data::loadDataFromFile(const std::string path_file){
     }
 }
 
+bool Data::allAttrUsed(std::string used_attr){
+    if( data.size()!=0){
+        return data.begin()->allAttrUsed(used_attr);
+    }
+    return false;
+}
+
 Data::Data( Data* dat, char attr, char val){
     // create new Data as a set grouped by attr=val
 
@@ -75,6 +76,16 @@ Data::Data( Data* dat, char attr, char val){
     }
 
 }
+
+Data::Data(std::vector<DNA> dna ):
+    data(dna)
+{
+}
+
+// Data::Data ( Data& d ){
+//     data = *d.getData();
+//     boundary_e_i = d.getBoundaryEI();
+// }
 
 void Data::printData(){
     std::vector<DNA>::iterator it = data.begin();
@@ -92,4 +103,50 @@ bool Data::dataOneVal(){
         }
     }
     return true;
+}
+
+void Data::mixData(){
+    std::vector<int> indexes(data.size());
+    std::vector<DNA> mixed_data(data.size());
+    for( int i=0; i<data.size(); ++i ){
+        indexes[i] = i;   // initialize pom indexes
+    }
+    std::default_random_engine generator;
+    for( int i=0; i<data.size(); ++i ){
+        std::uniform_int_distribution<int> distribution(0, data.size()-i-1);
+        int number = distribution(generator);
+        mixed_data.at(i).setDNA( data.at(indexes[number]).getDNA_sequence(), data.at(indexes[number]).getValue());
+        indexes.erase(indexes.begin() + number);
+    }
+    data = mixed_data;
+}
+
+std::vector<DNA> Data::getLearningSet(int idx, int nr_divs ){
+    std::vector<DNA> learning_set(0);
+    if ( idx >= nr_divs ) {std::cout << "Error getLearningSet() idx>=nr_divs"; return learning_set; }
+    int nr_data = data.size()/nr_divs;
+    int set_size=nr_data;
+    int rest = data.size()%nr_divs;
+    if ( rest>=(idx+1) ) set_size+=1;
+    learning_set.resize( data.size() - set_size );
+
+    if(idx!=0){
+        std::copy(data.begin(), data.begin() + idx*nr_data + std::min(idx, rest)/*-1*/, learning_set.begin());
+    }
+    if(idx!=nr_divs-1){
+        std::copy( data.begin() + idx*nr_data + std::min(idx, rest) + set_size, data.end(), learning_set.begin() + idx*nr_data + std::min(idx, rest) );
+    }
+    return learning_set;
+}
+
+std::vector<DNA> Data::getTestSet(int idx, int nr_divs){
+        std::vector<DNA> test_set;
+    if ( idx > nr_divs ) {std::cout << "Error getTestSet() idx>=nr_divs"; return test_set; }
+    int nr_data = data.size()/nr_divs;
+    int set_size=nr_data;
+    int rest = data.size()%nr_divs;
+    if ( rest>=(idx+1) ) set_size+=1;
+    test_set.resize( set_size );
+    std::copy(data.begin() + idx*nr_data + std::min(idx, rest), data.begin() + idx*nr_data + std::min(idx, rest) + set_size, test_set.begin() );
+    return test_set;
 }
