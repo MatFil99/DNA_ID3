@@ -1,5 +1,5 @@
-prog: main.o tree.o data.o entropy.o test_data.o
-	g++ -o prog main.o tree.o data.o entropy.o test_data.o
+prog: main.o tree.o data.o entropy.o test_data.o test.o
+	g++ -o prog main.o tree.o data.o entropy.o test_data.o test.o
 
 main.o:
 	g++ -c main.cpp
@@ -15,6 +15,9 @@ data.o:
 
 test_data.o:
 	g++ -c test_data.cpp test_data.h
+
+test.o:
+	g++ -c test.cpp test.h
 
 clear:
 	rm -f *.o *.gch prog

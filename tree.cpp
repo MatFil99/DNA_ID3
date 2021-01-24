@@ -98,18 +98,6 @@ void Tree::making(Node* root, Data* set, std::string used_attrs){
     Data setC(set, attr_lowest, 'C');
     Data setG(set, attr_lowest, 'G');
     Data setT(set, attr_lowest, 'T');
-
-    // std::cout << used_attrs <<"\n";
-
-    //entropy.printEntropyAttr();
-    
-// std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - - - - - -\n\n";
-
-    // setA.printData();
-// std::cout << "\n * * * * * * * * * * * * * * * * * *\n - - - - - - - - - - - - - - - - -\n\n";
-
-    // setC.printData();
-
     makeBranch(root, set, &setA, used_attrs, 'A');
     makeBranch(root, set, &setC, used_attrs, 'C');
     makeBranch(root, set, &setG, used_attrs, 'G');
