@@ -23,16 +23,25 @@ int main(){
 
     Data data;
 
-    data.loadDataFromFile("dane/spliceDTrainKIS.dat");
+    data.loadDataFromFile("dane/spliceATrainKIS.dat");
 
     Tree tree(&data);
 
-    // tree.makeTree();
+    // std::cout << data.getData()->at(0).getDNA_sequence().length();
+
+    tree.makeTree();
+
+    // data.printData();
 
     // tree.getRoot();
 
-    TestData tdata;
+    // TestData tdata(data, &tree);
 
+    // tdata.classify();
+
+    // tdata.printData();
+
+    // std::cout << "Efficiency:\t" << tdata.checkEfficiency() << "\n";
 
     // tree.printTree();
     // Node* node1 = new Node(nullptr, nullptr, nullptr, nullptr, 0, 0);
