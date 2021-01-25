@@ -9,21 +9,10 @@
 
 int main(){
 
-    // Test tests;
+    Test tests;
 
-    
-
-    // tests.TestClassifyMixed("dane/spliceDTrainKIS.dat", 5);
-    // tests.TestClassifySorted("dane/spliceDTrainKIS.dat", 5);
-
-
-    std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(0,9);
-
-    for(int i = 0; i<10; i++ ){
-        std::cout << distribution(generator) << "\n";
-    }
-
+    tests.TestsRun("dane/spliceDTrainKIS.dat", "spliceDresults.txt");
+    tests.TestsRun("dane/spliceATrainKIS.dat", "spliceAresults.txt");
 
     return 0;
 }

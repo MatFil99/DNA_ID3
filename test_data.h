@@ -4,7 +4,7 @@
 // #include "data.h"
 #include "tree.h"
 
-class TestData: public Data{
+class TestData : public Data{
 public:
     Tree* classifier;
     std::vector<DNA> learning_set;

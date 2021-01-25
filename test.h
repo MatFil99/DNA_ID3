@@ -9,7 +9,7 @@ class Test{
 public:
     void TestClassifySorted(const std::string path_file, int divs);
     void TestClassifyMixed(const std::string path_file, int divs);
-
+    void TestsRun(const std::string data_file, const std::string results_file);
 };
 
 #endif
