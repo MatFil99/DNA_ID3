@@ -52,8 +52,10 @@ int Data::loadDataFromFile(const std::string path_file){
         }
         std::cout << "Successful opening file\n";
         file.close();
+        return 0;
     }else{
         std::cout << "Couldn't open file\n";
+        return -1;
     }
 }
 
